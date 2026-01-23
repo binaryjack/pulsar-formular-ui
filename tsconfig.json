@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "pulsar",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "paths": {
+      "pulsar": ["../pulsar.dev/dist/index.d.ts"],
+      "@pulsar-framework/ui": ["../pulsar-ui.dev/src/index.ts"],
+      "@pulsar-framework/design-tokens": ["../pulsar-design-system/src/index.ts"],
+      "formular.dev.lib": ["../formular.dev/src/index.ts"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.type.ts",
+    "src/**/*.interface.ts",
+    "src/**/*.enum.ts",
+    "../pulsar.dev/pulsar.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
