@@ -1,7 +1,7 @@
 {
   "name": "@pulsar-framework/formular-ui",
   "version": "0.1.0-alpha",
-  "description": "Form components library for Pulsar framework using formular.dev",
+  "description": "Enterprise-grade form components for Pulsar framework integrated with formular.dev",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -14,10 +14,10 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "dev": "vite",
+    "build:isolated": "tsc --project tsconfig.build.json",
+    "dev": "vite --port 3000",
     "typecheck": "tsc --noEmit",
-    "storybook": "storybook dev -p 6007",
-    "build-storybook": "storybook build"
+    "clean": "rimraf dist"
   },
   "keywords": [
     "pulsar",
@@ -30,24 +30,18 @@
     "tailwind"
   ],
   "dependencies": {
-    "@pulsar-framework/core": "workspace:*",
-    "@pulsar-framework/ui": "workspace:*",
+    "@pulsar-framework/pulsar.dev": "workspace:*",
     "@pulsar-framework/design-tokens": "workspace:^",
+    "@pulsar-framework/ui": "workspace:*",
     "formular.dev.lib": "workspace:*"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "8.6.14",
-    "@storybook/addon-interactions": "8.6.14",
-    "@storybook/addon-links": "8.6.14",
-    "@storybook/blocks": "8.6.14",
-    "@storybook/html": "8.6.14",
-    "@storybook/html-vite": "8.6.14",
-    "@storybook/test": "8.6.14",
+    "@pulsar-framework/vite-plugin": "workspace:0.7.0-alpha",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
-    "storybook": "8.6.14",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
   },
   "author": "Tadeo Piana <https://www.linkedin.com/in/tadeopiana/>",
   "license": "MIT",

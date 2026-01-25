@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/html-vite';
+import { resolve } from 'path';
 
 const config: StorybookConfig = {
   "stories": [
@@ -11,10 +12,12 @@ const config: StorybookConfig = {
   ],
   "framework": {
     "name": "@storybook/html-vite",
-    "options": {}
+    "options": {
+      viteConfigPath: resolve(__dirname, '../vite.config.ts')
+    }
   },
   "docs": {
     "autodocs": true
-  }
+  },
 };
 export default config;

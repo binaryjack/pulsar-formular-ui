@@ -45,3 +45,31 @@ export interface FormProps {
   children: any;
   className?: string;
 }
+
+/**
+ * Integrated field component props
+ * For components that include label, validation, etc.
+ */
+export interface IIntegratedFieldProps {
+  /** Field name (must match field descriptor) */
+  readonly name: string;
+  /** Optional CSS class name */
+  readonly className?: string;
+  /** Optional helper text */
+  readonly helperText?: string;
+  /** Label override (defaults to field.label) */
+  readonly label?: string;
+  /** Whether to show the label (default: true) */
+  readonly showLabel?: boolean;
+  /** Whether to show validation errors (default: true) */
+  readonly showErrors?: boolean;
+  /** Whether to show validation guides (default: true) */
+  readonly showGuides?: boolean;
+}
+
+// Export new type definitions
+export * from './field-component.type';
+export * from './field-descriptor-config.type';
+export * from './form-context.type';
+export * from './form-provider.type';
+export * from './portal.type';

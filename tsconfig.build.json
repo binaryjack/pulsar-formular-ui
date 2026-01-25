@@ -1,15 +1,23 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "outDir": "./dist",
     "noEmit": false,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false
+    "emitDeclarationOnly": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "../pulsar.dev/pulsar.d.ts"],
   "exclude": [
     "node_modules",
     "dist",
+    "../formular.dev",
+    "../pulsar.dev",
+    "../pulsar-ui.dev",
+    "../pulsar-design-system",
+    "../core",
     "**/*.stories.ts",
     "**/*.stories.tsx",
     "**/*.test.ts",

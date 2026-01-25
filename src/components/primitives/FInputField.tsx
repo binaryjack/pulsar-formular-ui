@@ -1,0 +1,45 @@
+/**
+ * FInputField primitive component
+ * Atomic input field with formular.dev binding
+ *
+ * @example
+ * ```tsx
+ * <FInputField name="username" />
+ * <FInputField name="email" loading={true} />
+ * ```
+ */
+
+import type { IFieldComponentProps } from '../../types';
+import { useFormContext } from '../form-context';
+
+/**
+ * FInputField component - Primitive input field
+ * Single output: <input> element with formular binding
+ */
+export const FInputField = ({
+  name,
+  loading = false,
+  className = '',
+}: IFieldComponentProps): HTMLElement => {
+  const { getField } = useFormContext();
+  const field = getField(name);
+
+  if (!field) {
+    console.warn(`Field "${name}" not found in form`);
+    return <div data-field-error>{`Field "${name}" not found`}</div>;
+  }
+
+  // Skeleton fallback on loading
+  if (loading) {
+    return <div className="h-10 w-full bg-gray-200 animate-pulse rounded" data-loading={name} />;
+  }
+
+  // Single output: input element
+  return (
+    <input
+      {...field.register()}
+      ref={field.ref()}
+      className={`px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none w-full ${className}`}
+    />
+  );
+};
