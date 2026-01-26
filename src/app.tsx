@@ -12,8 +12,8 @@ import './styles.css';
  * Define form schema using f.object()
  */
 const userSchema = f.object({
-  username: f.string().min(3).max(20).nonempty().debounce(2000),
-  email: f.string().email().nonempty().debounce(7000),
+  username: f.string().min(3).max(20).nonempty().debounce(200),
+  email: f.string().email().nonempty().debounce(200),
   bio: f.string().min(10).max(200).optional(),
 });
 
@@ -51,11 +51,27 @@ const App = async () => {
     console.log('📋 [FORMULAR] Field[0] (username):', form.fields[0]);
     console.log('📋 [FORMULAR] Field[0] name:', form.fields[0]?.input?.name);
     console.log('📋 [FORMULAR] Field[0] isInitialized:', form.fields[0]?.isInitialized);
+    console.log(
+      '📋 [FORMULAR] Field[0] validationManager:',
+      form.fields[0]?.input?.validationManager
+    );
+    console.log(
+      '📋 [FORMULAR] Field[0] triggerKeyWordType:',
+      form.fields[0]?.input?.validationManager?.triggerKeyWordType
+    );
+    console.log(
+      '📋 [FORMULAR] Field[0] validationStrategies:',
+      form.fields[0]?.input?.validationManager?.validationStrategies
+    );
 
     if (form.fields[1]) {
       console.log('📋 [FORMULAR] Field[1] (email):', form.fields[1]);
       console.log('📋 [FORMULAR] Field[1] name:', form.fields[1]?.input?.name);
       console.log('📋 [FORMULAR] Field[1] isInitialized:', form.fields[1]?.isInitialized);
+      console.log(
+        '📋 [FORMULAR] Field[1] triggerKeyWordType:',
+        form.fields[1]?.input?.validationManager?.triggerKeyWordType
+      );
     }
   }
 
