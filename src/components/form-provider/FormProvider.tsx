@@ -115,6 +115,13 @@ export const FormProvider = <T extends object>({
    */
   const getField = (fieldName: string) => {
     const fieldWrapper = form?.getField(fieldName);
+    console.log(`[FormProvider.getField] "${fieldName}" from form:`, fieldWrapper);
+    console.log(`[FormProvider.getField] Type:`, typeof fieldWrapper);
+    console.log(`[FormProvider.getField] Keys:`, fieldWrapper ? Object.keys(fieldWrapper) : 'null');
+    console.log(
+      `[FormProvider.getField] Prototype:`,
+      fieldWrapper ? Object.getPrototypeOf(fieldWrapper) : 'null'
+    );
     // Return the wrapper itself - it should have register() and ref() methods
     return fieldWrapper;
   };
@@ -160,20 +167,13 @@ export const FormProvider = <T extends object>({
     getErrors,
   };
 
-  // Set context value SYNCHRONOUSLY before rendering
-  // This makes it available immediately when children execute
-  console.log('[FormProvider] Calling FormContext.setValue with:', formContextData);
-  console.log('[FormProvider] FormContext.setValue exists?', typeof FormContext.setValue);
-  FormContext.setValue(formContextData);
-
-  // Evaluate children if it's a function (deferred children pattern)
-  const evaluatedChildren = typeof children === 'function' ? children() : children;
-
+  // Context.Provider will set the signal BEFORE evaluating children
+  // Don't pre-evaluate children here - let Provider handle the timing
   return (
     <FormContext.Provider value={formContextData}>
       <div data-form-provider={form?.id}>
         <form id={form?.id} className="space-y-6">
-          {evaluatedChildren}
+          {children}
         </form>
         <FormModale />
         <FormValidationResults />

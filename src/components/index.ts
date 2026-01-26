@@ -15,3 +15,6 @@ export * from './primitives';
 
 // Integrated field components (FieldSet wrappers with Field suffix)
 export * from './integrated';
+
+// Debug components
+export { FormDataDisplay } from './debug/FormDataDisplay';

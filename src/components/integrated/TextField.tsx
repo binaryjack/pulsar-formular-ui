@@ -27,34 +27,24 @@ export const TextField = ({
   helperText,
   className = '',
 }: IIntegratedFieldProps): HTMLElement => {
-  console.log('[TextField] Calling useFormContext for:', name);
+  console.log(`[TextField] Rendering TextField for "${name}"`);
   const formContext = useFormContext();
-  console.log('[TextField] useFormContext returned:', formContext);
-
-  if (!formContext) {
-    console.error('[TextField] formContext is undefined for field:', name);
-    return <div data-field-error>FormContext is undefined</div>;
-  }
 
   const field = formContext.getField(name);
 
-  if (!field) {
-    console.warn(`Field "${name}" not found in form`);
-    return <div data-field-error>{`Field "${name}" not found`}</div>;
-  }
-
-  const input = field.input;
-  const displayLabel = label || input.label;
+  const input = field?.input;
+  const displayLabel = label || input?.label;
   // validationResults is an array, not an object with errors/guides properties
-  const errors = (input.validationResults as any) || [];
+  const errors = (input?.validationResults as any) || [];
   const guides: any[] = []; // Guides not available in current structure
   const hasErrors = showErrors && errors.length > 0;
   const hasGuides = showGuides && guides.length > 0;
 
   return (
     <div className={`form-field ${className}`} data-field={name}>
+      {/** [copilot] label should use the pulsar-ui Label  which needs to be modified it must take for props and then adds it with interpolation */}
       {showLabel && (
-        <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor={`${input?.id}`} className="block text-sm font-medium text-gray-700 mb-1">
           {displayLabel}
         </label>
       )}

@@ -3,8 +3,8 @@
  * Confirmation dialog for form actions (quit, reset, etc.)
  */
 
-import { createSignal } from '@pulsar-framework/core';
 import { Button } from '@pulsar-framework/ui';
+import { createSignal } from 'pulsar/reactivity';
 import { ModaleCommands, ModaleStyle } from '../../types';
 import { useModale } from './useModale';
 

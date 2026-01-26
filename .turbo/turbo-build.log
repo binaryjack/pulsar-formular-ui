@@ -1,7 +1,2 @@
 [?25l[2J[m[2;1H> @pulsar-framework/formular-ui@0.1.0-alpha build E:\Sources\visual-schema-builder\packages\pulsar-formular-ui
-> tsc --project tsconfig.build.json[5;1H]0;C:\WINDOWS\system32\cmd.exe[?25h[?25l[96msrc/components/form-context/useFormContext.ts[m:[93m7[m:[93m28 [m- [91merror [90mTS2307: [mCannot find module 'pulsar/context' or its corresponding type declarations.[7m[8;1H7[27m import { useContext } from 'pulsar/context';[7m
- [27m[28X[91m[28C~~~~~~~~~~~~~~~~[96m[11;1Hsrc/components/form-provider/FormProvider.tsx[m:[93m24[m:[93m27 [m- [91merror [90mTS2307: [mCannot find module 'pulsar/hooks' or its corresponding type declarations.[7m[14;1H24[27m import { useEffect } from 'pulsar/hooks';[7m
-  [27m[27X[91m[27C~~~~~~~~~~~~~~[m[18;1HFound 2 errors in 2 files.[20;1HErrors  Files[?25h
-     1  src/components/form-context/useFormContext.ts[90m:7[K[m
-     1  src/components/form-provider/FormProvider.tsx[90m:24[K[m
-[30m[41m ELIFECYCLE [m [31mCommand failed with exit code 2.[m
+> tsc --project tsconfig.build.json[5;1H]0;C:\WINDOWS\system32\cmd.exe[?25h

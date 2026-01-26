@@ -25,7 +25,7 @@ export interface IFormProviderProps<T extends object> {
   readonly onQuitCallback: () => void;
 
   /** Child components that will be rendered within the form (or a thunk returning children) */
-  readonly children: JSX.Children | (() => JSX.Children);
+  readonly children: JSX.Children;
 }
 
 /**

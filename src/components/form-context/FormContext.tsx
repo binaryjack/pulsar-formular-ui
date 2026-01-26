@@ -3,7 +3,7 @@
  * Provides form operations and field access throughout the component tree
  */
 
-import { createContext } from '@pulsar-framework/pulsar.dev';
+import { createContext } from 'pulsar/context';
 import type { IFormContext } from '../../types';
 
 /**

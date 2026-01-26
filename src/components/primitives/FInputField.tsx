@@ -34,11 +34,34 @@ export const FInputField = ({
     return <div className="h-10 w-full bg-gray-200 animate-pulse rounded" data-loading={name} />;
   }
 
-  // Single output: input element
+  // Get registration attributes from formular.dev
+  const registerAttrs = field.register();
+
+  // Bind ref function to attach event listeners manually
+  const boundRef = (element: HTMLInputElement | null) => {
+    if (element) {
+      // Attach event handlers manually (Pulsar doesn't auto-convert JSX events to addEventListener)
+      if (registerAttrs.onChange) {
+        element.addEventListener('input', registerAttrs.onChange as EventListener);
+      }
+      if (registerAttrs.onBlur) {
+        element.addEventListener('blur', registerAttrs.onBlur as EventListener);
+      }
+      if (registerAttrs.onFocus) {
+        element.addEventListener('focus', registerAttrs.onFocus as EventListener);
+      }
+    }
+
+    field.ref(element);
+  };
+
+  // Extract non-event attributes for spreading
+  const { onChange, onBlur, onFocus, ...attrs } = registerAttrs;
+
   return (
     <input
-      {...field.register()}
-      ref={field.ref()}
+      {...attrs}
+      ref={boundRef}
       className={`px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none w-full ${className}`}
     />
   );

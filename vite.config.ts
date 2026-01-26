@@ -5,6 +5,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   root: './src',
   plugins: [pulsarPlugin()],
+  server: {
+    hmr: {
+      overlay: true,
+    },
+    open: true,
+  },
   resolve: {
     alias: [
       {
@@ -56,11 +62,11 @@ export default defineConfig({
       },
       {
         find: '@pulsar-framework/ui',
-        replacement: resolve(__dirname, './src/stories/__mocks__/pulsar-ui.tsx'),
+        replacement: resolve(__dirname, '../pulsar-ui.dev/src/index.ts'),
       },
       {
         find: '@pulsar-framework/design-tokens',
-        replacement: resolve(__dirname, '../pulsar-design-system/src/tokens/index.ts'),
+        replacement: resolve(__dirname, '../pulsar-design-system/src/index.ts'),
       },
       { find: 'formular.dev.lib', replacement: resolve(__dirname, '../formular.dev/src/index.ts') },
       // formular.dev path aliases (no trailing slash)
@@ -95,8 +101,10 @@ export default defineConfig({
       'pulsar/error-boundary',
       'pulsar/di',
       'pulsar/control-flow',
+      'formular.dev.lib',
     ],
     exclude: ['pulsar/ssr', '@pulsar-framework/ui'],
+    force: true,
   },
   build: {
     lib: {
