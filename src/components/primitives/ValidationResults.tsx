@@ -1,10 +1,10 @@
 /**
- * ValidationResults component
+ * FieldValidation component
  * Displays validation errors and guides for a field
  *
  * @example
  * ```tsx
- * <ValidationResults
+ * <FieldValidation
  *   fieldName="email"
  *   showErrors={true}
  *   showGuides={true}
@@ -12,11 +12,15 @@
  * ```
  */
 
+import { Fragment } from 'pulsar/jsx-runtime'; // Required for <>...</> JSX syntax
 import { useFieldValidation } from '../../hooks/useFieldValidation';
 import type { IFieldError } from '../../types';
 import { useFormContext } from '../form-context';
 
-export interface IValidationResultsProps {
+// TypeScript requires Fragment in scope for JSX fragments
+const _Fragment = Fragment;
+
+export interface IFieldValidationProps {
   /** Field name to display validation for */
   fieldName: string;
   /** Whether to show error messages (default: true) */
@@ -30,16 +34,16 @@ export interface IValidationResultsProps {
 }
 
 /**
- * ValidationResults component
+ * FieldValidation component
  * Encapsulates error and guide display logic
  */
-export const ValidationResults = ({
+export const FieldValidation = ({
   fieldName,
   showErrors = true,
   showGuides = true,
   errorsClassName = 'validation-errors mt-1',
   guidesClassName = 'validation-guides mt-1',
-}: IValidationResultsProps): HTMLElement | null => {
+}: IFieldValidationProps): HTMLElement | null => {
   const formContext = useFormContext();
   const field = formContext.getField(fieldName);
 
@@ -63,7 +67,7 @@ export const ValidationResults = ({
         </div>
       )}
 
-      {showGuides && hasErrors() && (
+      {showGuides && guides().length > 0 && (
         <div className={guidesClassName}>
           {guides().map((guide: { message: string }) => (
             <p key={guide.message} className="text-blue-600 text-sm">

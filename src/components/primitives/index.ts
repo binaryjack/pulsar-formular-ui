@@ -19,8 +19,8 @@ export { FToggleField } from './FToggleField';
 /**
  * Utility components for field composition
  */
-export { ValidationResults } from './ValidationResults';
-export type { IValidationResultsProps } from './ValidationResults';
+export { FieldValidation } from './ValidationResults';
+export type { IFieldValidationProps } from './ValidationResults';
 
 export { HelperText } from './HelperText';
 export type { IHelperTextProps } from './HelperText';

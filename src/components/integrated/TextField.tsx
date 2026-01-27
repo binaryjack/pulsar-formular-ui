@@ -11,7 +11,7 @@
 
 import type { IIntegratedFieldProps } from '../../types';
 import { useFormContext } from '../form-context';
-import { FieldLabel, FInputField, HelperText, ValidationResults } from '../primitives';
+import { FieldLabel, FieldValidation, FInputField, HelperText } from '../primitives';
 
 /**
  * TextField component
@@ -20,7 +20,7 @@ import { FieldLabel, FInputField, HelperText, ValidationResults } from '../primi
  * Composition pattern: Combines primitives for full-featured field
  * - FieldLabel: Conditional label display
  * - FInputField: Core input with formular.dev binding
- * - ValidationResults: Error and guide messages
+ * - FieldValidation: Error and guide messages
  * - HelperText: Supplementary help text
  */
 export const TextField = ({
@@ -42,7 +42,7 @@ export const TextField = ({
     <div className={`form-field ${className}`} data-field={name}>
       <FieldLabel showLabel={showLabel} label={displayLabel} htmlFor={`${input?.id}`} />
       <FInputField name={name} className="" />
-      <ValidationResults fieldName={name} showErrors={showErrors} showGuides={showGuides} />
+      <FieldValidation fieldName={name} showErrors={showErrors} showGuides={showGuides} />
       <HelperText helperText={helperText} />
     </div>
   ) as HTMLElement;
