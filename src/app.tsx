@@ -17,10 +17,6 @@ const userSchema = f.object({
   bio: f.string().min(10).max(200).optional(),
 });
 
-/**
- * Main application component - Demo form with real-time data display
- */
-
 // Create form using new v2.0 API
 const form = await createForm({
   schema: userSchema,
@@ -40,42 +36,11 @@ const form = await createForm({
   },
 });
 
-const App = async () => {
-  // Debug: Log form structure
-  console.log('📋 [FORMULAR] Form created:', form);
-  console.log('📋 [FORMULAR] Form fields:', form.fields);
-  console.log('📋 [FORMULAR] Form fields is Array:', Array.isArray(form.fields));
+form.subscribe('onValidate', 'debug').on((data) => {
+  console.log('_:::::::::_', data);
+});
 
-  // Fields are in an array, access by index
-  if (form.fields && form.fields.length > 0) {
-    console.log('📋 [FORMULAR] Field[0] (username):', form.fields[0]);
-    console.log('📋 [FORMULAR] Field[0] name:', form.fields[0]?.input?.name);
-    console.log('📋 [FORMULAR] Field[0] isInitialized:', form.fields[0]?.isInitialized);
-    console.log(
-      '📋 [FORMULAR] Field[0] validationManager:',
-      form.fields[0]?.input?.validationManager
-    );
-    console.log(
-      '📋 [FORMULAR] Field[0] triggerKeyWordType:',
-      form.fields[0]?.input?.validationManager?.triggerKeyWordType
-    );
-    console.log(
-      '📋 [FORMULAR] Field[0] validationStrategies:',
-      form.fields[0]?.input?.validationManager?.validationStrategies
-    );
-
-    if (form.fields[1]) {
-      console.log('📋 [FORMULAR] Field[1] (email):', form.fields[1]);
-      console.log('📋 [FORMULAR] Field[1] name:', form.fields[1]?.input?.name);
-      console.log('📋 [FORMULAR] Field[1] isInitialized:', form.fields[1]?.isInitialized);
-      console.log(
-        '📋 [FORMULAR] Field[1] triggerKeyWordType:',
-        form.fields[1]?.input?.validationManager?.triggerKeyWordType
-      );
-    }
-  }
-
-  // Demo form with live data display to visualize debouncing
+const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -116,12 +81,4 @@ const appRoot = bootstrapApp()
   })
   .build();
 
-// Mount - bootstrapper handles DOM ready internally
-// App is async now, so we need to wait for it
-App().then((appElement) => {
-  appRoot.mount(appElement);
-});
-
-form.subscribe('onValidate', 'debug').on((data) => {
-  console.log('_:::::::::_', data);
-});
+appRoot.mount(App());

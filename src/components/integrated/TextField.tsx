@@ -10,6 +10,8 @@
  */
 
 import type { IFieldError } from 'formular.dev.lib';
+import { createEffect as formularCreateEffect } from 'formular.dev.lib';
+import { useSync } from 'pulsar';
 import type { IIntegratedFieldProps } from '../../types';
 import { useFormContext } from '../form-context';
 import { FInputField } from '../primitives';
@@ -27,53 +29,78 @@ export const TextField = ({
   helperText,
   className = '',
 }: IIntegratedFieldProps): HTMLElement => {
-  console.log(`[TextField] Rendering TextField for "${name}"`);
   const formContext = useFormContext();
 
   const field = formContext.getField(name);
-
   const input = field?.input;
   const displayLabel = label || input?.label;
-  // validationResults is an array, not an object with errors/guides properties
-  const errors = (input?.validationResults as any) || [];
-  const guides: any[] = []; // Guides not available in current structure
-  const hasErrors = showErrors && errors.length > 0;
-  const hasGuides = showGuides && guides.length > 0;
+
+  // Bridge formular.dev's validationResults signal to Pulsar using useSync
+  const validationResults = useSync(
+    // Subscribe: formular.dev's createEffect tracks the signal
+    (notify) => {
+      return formularCreateEffect(() => {
+        // This reads formular.dev's signal and establishes dependency
+        (input as any)._validationResults?.get();
+        // When it changes, notify Pulsar
+        notify();
+      });
+    },
+    // Snapshot: get current value for Pulsar
+    () => (input as any)._validationResults?.get() || []
+  );
+
+  const hasErrors = validationResults().length > 0;
+
+  // Extract errors from validation results (now reactive!)
+  const errors = (): IFieldError[] => {
+    const results = validationResults(); // This reads the Pulsar signal
+    return results
+      .filter((result: any) => result.state === false && result.errorMessage)
+      .map((result: any) => ({
+        name: result.name,
+        message: result.errorMessage,
+        code: result.code,
+      }));
+  };
+
+  // Extract guides from validation results (now reactive!)
+  const guides = () => {
+    const results = validationResults(); // This reads the Pulsar signal
+    return results
+      .filter((result: any) => result.guideMessage)
+      .map((result: any) => ({
+        message: result.guideMessage,
+      }));
+  };
 
   return (
     <div className={`form-field ${className}`} data-field={name}>
-      {/** [copilot] label should use the pulsar-ui Label  which needs to be modified it must take for props and then adds it with interpolation */}
-      {showLabel && (
+      {showLabel && displayLabel && (
         <label htmlFor={`${input?.id}`} className="block text-sm font-medium text-gray-700 mb-1">
           {displayLabel}
         </label>
       )}
 
-      <FInputField name={name} className={hasErrors ? 'border-red-500' : ''} />
+      <FInputField name={name} className="" />
 
       {hasErrors && (
         <div className="validation-errors mt-1">
-          {errors.map((error: IFieldError, index: number) => (
-            <p key={index} className="text-red-600 text-sm">
-              {error.message}
-            </p>
+          {errors().map((error: IFieldError) => (
+            <p className="text-red-600 text-sm">{error.message}</p>
           ))}
         </div>
       )}
 
-      {hasGuides && (
+      {showGuides && (
         <div className="validation-guides mt-1">
-          {guides.map((guide: { message: string }, index: number) => (
-            <p key={index} className="text-blue-600 text-sm">
-              {guide.message}
-            </p>
+          {guides().map((guide: { message: string }) => (
+            <p className="text-blue-600 text-sm">{guide.message}</p>
           ))}
         </div>
       )}
 
-      {helperText && !hasErrors && !hasGuides && (
-        <p className="text-gray-500 text-sm mt-1">{helperText}</p>
-      )}
+      {helperText && <p className="text-gray-500 text-sm mt-1">{helperText}</p>}
     </div>
-  );
+  ) as HTMLElement;
 };
