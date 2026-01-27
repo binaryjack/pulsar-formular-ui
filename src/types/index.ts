@@ -2,6 +2,9 @@
  * Type definitions for form components
  */
 
+// Re-export formular.dev types for convenience
+export type { IFieldError, IFieldGuide, IValidationResult } from './formular.types';
+
 export interface FormFieldProps {
   name: string;
   label?: string;
