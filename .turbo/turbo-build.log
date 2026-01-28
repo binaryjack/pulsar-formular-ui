@@ -1,2 +1,5 @@
-[?25l[2J[m[2;1H> @pulsar-framework/formular-ui@0.1.0-alpha build E:\Sources\visual-schema-builder\packages\pulsar-formular-ui
-> tsc --project tsconfig.build.json[6;1H]0;C:\WINDOWS\system32\cmd.exe[?25h
+
+> @pulsar-framework/formular-ui@0.1.0-alpha build E:\Sources\visual-schema-builder\packages\pulsar-formular-ui
+> echo 'Formular-ui build skipped'
+
+'Formular-ui build skipped'
