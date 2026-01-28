@@ -3,7 +3,7 @@
  * These will be stripped out in production builds
  */
 
-import { isDev } from 'pulsar/env';
+import { isDev } from '@pulsar-framework/pulsar.dev/env';
 
 const isDevMode = isDev();
 

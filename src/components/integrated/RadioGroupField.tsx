@@ -1,4 +1,4 @@
-import type { IOptionItem } from 'formular.dev.lib';
+import type { IOptionItem } from '@pulsar-framework/formular.dev';
 import {
   fieldOptions as defaultFieldOptions,
   IFieldSetProps,

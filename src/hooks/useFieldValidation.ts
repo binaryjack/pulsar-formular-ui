@@ -14,8 +14,8 @@
  * ```
  */
 
-import { createEffect as formularCreateEffect, IFieldGuide } from 'formular.dev.lib';
-import { useSync } from 'pulsar';
+import { createEffect as formularCreateEffect, IFieldGuide } from '@pulsar-framework/formular.dev';
+import { useSync } from '@pulsar-framework/pulsar.dev';
 import type { IFieldError, IValidationResult } from '../types';
 
 export interface IFieldValidationResult {

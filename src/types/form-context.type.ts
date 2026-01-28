@@ -3,7 +3,7 @@
  * Defines the shape of the FormContext provider value
  */
 
-import type { IExtendedInput, IFieldError, IFormular } from 'formular.dev.lib';
+import type { IExtendedInput, IFieldError, IFormular } from '@pulsar-framework/formular.dev';
 
 /**
  * Form context interface

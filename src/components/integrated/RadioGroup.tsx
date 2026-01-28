@@ -8,7 +8,7 @@
  * ```
  */
 
-import type { IFieldError } from 'formular.dev.lib';
+import type { IFieldError } from '@pulsar-framework/formular.dev';
 import type { IIntegratedFieldProps } from '../../types';
 import { useFormContext } from '../form-context';
 import { FRadioButton } from '../primitives';

@@ -2,8 +2,8 @@
  * Development entry point for testing pulsar-formular-ui components
  */
 
-import { createForm, f } from 'formular.dev.lib';
-import { bootstrapApp } from 'pulsar';
+import { createForm, f } from '@pulsar-framework/formular.dev';
+import { bootstrapApp } from '@pulsar-framework/pulsar.dev';
 import { TextField } from './components';
 import { FormProvider } from './components/form-provider';
 import './styles.css';

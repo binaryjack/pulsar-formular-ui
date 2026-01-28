@@ -4,7 +4,7 @@
  * FormProvider component prop types
  */
 
-import type { IFormular } from 'formular.dev.lib';
+import type { IFormular } from '@pulsar-framework/formular.dev';
 
 /**
  * Props for the FormProvider component

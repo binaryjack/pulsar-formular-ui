@@ -4,7 +4,7 @@
  * Can be injected via props or retrieved from service container
  */
 
-import type { IFormularManager } from 'formular.dev.lib';
+import type { IFormularManager } from '@pulsar-framework/formular.dev';
 
 /**
  * Hook for accessing the FormularManager singleton

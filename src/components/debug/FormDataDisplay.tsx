@@ -5,7 +5,7 @@
  * Demonstrates debouncing by tracking when notifications fire.
  */
 
-import { createSignal, useEffect } from 'pulsar/hooks';
+import { createSignal, useEffect } from '@pulsar-framework/pulsar.dev/hooks';
 import { useFormContext } from '../form-context';
 
 interface FormDataUpdate {

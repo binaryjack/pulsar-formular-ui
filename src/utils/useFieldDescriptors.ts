@@ -17,7 +17,7 @@
  * ```
  */
 
-import type { IFieldDescriptor } from 'formular.dev.lib';
+import type { IFieldDescriptor } from '@pulsar-framework/formular.dev';
 import type { FieldDescriptorConfig } from '../types';
 
 /**

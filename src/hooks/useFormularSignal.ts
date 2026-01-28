@@ -6,8 +6,8 @@
  * and trigger re-renders when the signal values change.
  */
 
-import { createEffect as formularCreateEffect } from 'formular.dev.lib';
-import { createSignal } from 'pulsar';
+import { createEffect as formularCreateEffect } from '@pulsar-framework/formular.dev';
+import { createSignal } from '@pulsar-framework/pulsar.dev';
 
 /**
  * Subscribe a Pulsar signal to a formular.dev signal
