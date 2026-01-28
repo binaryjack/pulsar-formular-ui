@@ -14,7 +14,7 @@
  * ```
  */
 
-import { createEffect as formularCreateEffect } from 'formular.dev.lib';
+import { createEffect as formularCreateEffect, IFieldGuide } from 'formular.dev.lib';
 import { useSync } from 'pulsar';
 import type { IFieldError, IValidationResult } from '../types';
 
@@ -24,7 +24,7 @@ export interface IFieldValidationResult {
   /** Reactive function: returns array of error messages */
   errors: () => IFieldError[];
   /** Reactive function: returns array of guide/hint messages */
-  guides: () => Array<{ message: string }>;
+  guides: () => IFieldGuide[];
   /** Reactive function: returns raw validation results */
   validationResults: () => IValidationResult[];
 }
@@ -63,22 +63,28 @@ export function useFieldValidation(field: any): IFieldValidationResult {
   const errors = (): IFieldError[] => {
     const results = validationResults();
     return results
-      .filter((result) => result.state === false && result.error)
-      .map((result) => ({
-        name: result.fieldName,
-        message: result.error!,
-        code: result.code,
-      }));
+      .filter((result: IValidationResult) => result.state === false && result.error)
+      .map(
+        (result: IValidationResult) =>
+          ({
+            name: result.fieldName,
+            message: result.error!,
+            code: result.code,
+          }) as IFieldError
+      );
   };
 
   // ✅ PATTERN: Reactive function that extracts guide messages
-  const guides = () => {
+  const guides = (): IFieldGuide[] => {
     const results = validationResults();
     return results
-      .filter((result) => result.guide)
-      .map((result) => ({
-        message: result.guide!,
-      }));
+      .filter((result: IValidationResult) => result.state === false && result.guide)
+      .map(
+        (result: IValidationResult) =>
+          ({
+            message: result.guide!,
+          }) as IFieldGuide
+      );
   };
 
   return {

@@ -9,6 +9,7 @@
  */
 
 import type { ISelectFieldProps } from '../../types';
+import { devLog } from '../../utils/dev-logger';
 import { useFormContext } from '../form-context';
 
 /**
@@ -25,7 +26,7 @@ export const FSelectField = ({
   const field = getField(name);
 
   if (!field) {
-    console.warn(`Field "${name}" not found in form`);
+    devLog.warn(`Field "${name}" not found in form`);
     return <div data-field-error>{`Field "${name}" not found`}</div>;
   }
 

@@ -115,13 +115,6 @@ export const FormProvider = <T extends object>({
    */
   const getField = (fieldName: string) => {
     const fieldWrapper = form?.getField(fieldName);
-    console.log(`[FormProvider.getField] "${fieldName}" from form:`, fieldWrapper);
-    console.log(`[FormProvider.getField] Type:`, typeof fieldWrapper);
-    console.log(`[FormProvider.getField] Keys:`, fieldWrapper ? Object.keys(fieldWrapper) : 'null');
-    console.log(
-      `[FormProvider.getField] Prototype:`,
-      fieldWrapper ? Object.getPrototypeOf(fieldWrapper) : 'null'
-    );
     // Return the wrapper itself - it should have register() and ref() methods
     return fieldWrapper;
   };

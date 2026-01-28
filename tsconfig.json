@@ -33,6 +33,7 @@
       "pulsar/error-boundary": ["../pulsar.dev/dist/error-boundary.d.ts"],
       "pulsar/di": ["../pulsar.dev/dist/di.d.ts"],
       "pulsar/control-flow": ["../pulsar.dev/dist/control-flow.d.ts"],
+      "pulsar/env": ["../pulsar.dev/dist/env/index.d.ts"],
       "@pulsar-framework/core": ["../pulsar.dev/dist/index.d.ts"],
       "@pulsar-framework/ui": ["../pulsar-ui.dev/dist/index.d.ts"],
       "@pulsar-framework/design-tokens": ["../pulsar-design-system/dist/index.d.ts"],

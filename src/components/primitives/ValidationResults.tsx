@@ -12,13 +12,9 @@
  * ```
  */
 
-import { Fragment } from 'pulsar/jsx-runtime'; // Required for <>...</> JSX syntax
-import { useFieldValidation } from '../../hooks/useFieldValidation';
+import { useField } from '../../hooks/useField';
 import type { IFieldError } from '../../types';
 import { useFormContext } from '../form-context';
-
-// TypeScript requires Fragment in scope for JSX fragments
-const _Fragment = Fragment;
 
 export interface IFieldValidationProps {
   /** Field name to display validation for */
@@ -43,39 +39,33 @@ export const FieldValidation = ({
   showGuides = true,
   errorsClassName = 'validation-errors mt-1',
   guidesClassName = 'validation-guides mt-1',
-}: IFieldValidationProps): HTMLElement | null => {
+}: IFieldValidationProps): HTMLElement => {
   const formContext = useFormContext();
   const field = formContext.getField(fieldName);
 
-  if (!field) {
-    console.warn(`[ValidationResults] Field "${fieldName}" not found`);
-    return null;
-  }
-
-  // Use the validation hook to get reactive validation state
-  const { hasErrors, errors, guides } = useFieldValidation(field);
+  // ✅ Use unified hook - gets ALL field state in one place
+  const { hasErrors, errors, guides, isFocused } = useField(field);
 
   return (
-    <>
-      {showErrors && hasErrors() && (
+    <div className="field-validation-container">
+      {showErrors && hasErrors() && !isFocused() && (
         <div className={errorsClassName}>
           {errors().map((error: IFieldError) => (
-            <p key={error.message} className="text-red-600 text-sm">
+            <p key={error.code} className="text-red-600 text-sm">
               {error.message}
             </p>
           ))}
         </div>
       )}
-
-      {showGuides && guides().length > 0 && (
+      {isFocused() && showGuides && (
         <div className={guidesClassName}>
-          {guides().map((guide: { message: string }) => (
-            <p key={guide.message} className="text-blue-600 text-sm">
+          {guides().map((guide) => (
+            <p key={guide.code} className="text-blue-600 text-sm">
               {guide.message}
             </p>
           ))}
         </div>
       )}
-    </>
-  ) as HTMLElement | null;
+    </div>
+  ) as HTMLElement;
 };
