@@ -33,7 +33,7 @@
     "@pulsar-framework/pulsar.dev": "workspace:*",
     "@pulsar-framework/design-tokens": "workspace:^",
     "@pulsar-framework/ui": "workspace:*",
-    "formular.dev.lib": "workspace:*"
+    "@pulsar-framework/formular.dev": "workspace:*"
   },
   "devDependencies": {
     "@pulsar-framework/vite-plugin": "workspace:0.7.0-alpha",

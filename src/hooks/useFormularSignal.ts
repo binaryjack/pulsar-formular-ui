@@ -6,8 +6,7 @@
  * and trigger re-renders when the signal values change.
  */
 
-import { createEffect as formularCreateEffect } from '@pulsar-framework/formular.dev';
-import { createSignal } from '@pulsar-framework/pulsar.dev';
+import { createEffect, createSignal } from '@pulsar-framework/pulsar.dev';
 
 /**
  * Subscribe a Pulsar signal to a formular.dev signal
@@ -27,7 +26,7 @@ export function useFormularSignal<T>(formularSignalGetter: () => T): [() => T, (
 
   // Use formular.dev's createEffect to track the signal
   // When it changes, update the Pulsar signal
-  formularCreateEffect(() => {
+  createEffect(() => {
     const newValue = formularSignalGetter();
     setPulsarValue(newValue);
   });

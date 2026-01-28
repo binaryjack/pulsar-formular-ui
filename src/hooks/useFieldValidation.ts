@@ -14,8 +14,8 @@
  * ```
  */
 
-import { createEffect as formularCreateEffect, IFieldGuide } from '@pulsar-framework/formular.dev';
-import { useSync } from '@pulsar-framework/pulsar.dev';
+import type { IFieldGuide } from '@pulsar-framework/formular.dev';
+import { createEffect, useSync } from '@pulsar-framework/pulsar.dev';
 import type { IFieldError, IValidationResult } from '../types';
 
 export interface IFieldValidationResult {
@@ -42,7 +42,7 @@ export function useFieldValidation(field: any): IFieldValidationResult {
   const validationResults = useSync<IValidationResult[]>(
     // Subscribe: formular.dev's createEffect tracks the signal
     (notify) => {
-      return formularCreateEffect(() => {
+      return createEffect(() => {
         // This reads formular.dev's signal and establishes dependency
         (input as any)?._validationResults?.get();
         // When it changes, notify Pulsar

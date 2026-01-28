@@ -37,8 +37,8 @@
  * ```
  */
 
-import { createEffect as formularCreateEffect, IFieldGuide } from '@pulsar-framework/formular.dev';
-import { useSync } from '@pulsar-framework/pulsar.dev';
+import type { IFieldGuide } from '@pulsar-framework/formular.dev';
+import { createEffect, useSync } from '@pulsar-framework/pulsar.dev';
 import type { IFieldError, IValidationResult } from '../types';
 
 export interface IUseFieldResult {
@@ -117,7 +117,7 @@ export function useField(field: any): IUseFieldResult {
   // ==================== SYNC VALUE ====================
   const value = useSync<any>(
     (notify) => {
-      return formularCreateEffect(() => {
+      return createEffect(() => {
         input?._value?.get();
         notify();
       });
@@ -128,7 +128,7 @@ export function useField(field: any): IUseFieldResult {
   // ==================== SYNC VALIDATION RESULTS ====================
   const validationResults = useSync<IValidationResult[]>(
     (notify) => {
-      return formularCreateEffect(() => {
+      return createEffect(() => {
         (input as any)?._validationResults?.get();
         notify();
       });
@@ -142,7 +142,7 @@ export function useField(field: any): IUseFieldResult {
 
   const isValid = useSync<boolean>(
     (notify) => {
-      return formularCreateEffect(() => {
+      return createEffect(() => {
         input?._isValid?.get();
         notify();
       });
@@ -192,7 +192,7 @@ export function useField(field: any): IUseFieldResult {
   // ==================== SYNC FIELD PROPERTIES ====================
   const isRequired = useSync<boolean>(
     (notify) => {
-      return formularCreateEffect(() => {
+      return createEffect(() => {
         input?.validationOptions?.required?.value;
         notify();
       });
