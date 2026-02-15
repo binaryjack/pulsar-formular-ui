@@ -1,0 +1,12 @@
+export component ExponentTest() {
+  const base = 2;
+  const power = 3;
+  const result = base ** power; // Should NOT trigger warning anymore
+  
+  return (
+    <div>
+      <h2>Exponentiation Test</h2>
+      <p>{base} ** {power} = {result}</p>
+    </div>
+  );
+}
