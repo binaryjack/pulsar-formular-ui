@@ -10,6 +10,10 @@ export default defineConfig({
       overlay: true,
     },
     open: true,
+    // Disable caching for development
+    headers: {
+      'Cache-Control': 'no-store', // Prevent browser caching
+    },
   },
   resolve: {
     alias: [
@@ -103,7 +107,7 @@ export default defineConfig({
       'pulsar/control-flow',
       'formular.dev.lib',
     ],
-    exclude: ['pulsar/ssr', '@pulsar-framework/ui'],
+    exclude: ['pulsar/ssr', '@pulsar-framework/ui', '@pulsar-framework/pulsar.dev'],
     force: true,
   },
   build: {
