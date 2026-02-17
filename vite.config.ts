@@ -72,6 +72,10 @@ export default defineConfig({
         find: '@pulsar-framework/design-tokens',
         replacement: resolve(__dirname, '../pulsar-design-system/src/index.ts'),
       },
+      {
+        find: '@pulsar-framework/formular.dev',
+        replacement: resolve(__dirname, '../formular.dev/src/index.ts'),
+      },
       { find: 'formular.dev.lib', replacement: resolve(__dirname, '../formular.dev/src/index.ts') },
       // formular.dev path aliases (no trailing slash)
       { find: '@core', replacement: resolve(__dirname, '../formular.dev/src/core') },
@@ -107,7 +111,12 @@ export default defineConfig({
       'pulsar/control-flow',
       'formular.dev.lib',
     ],
-    exclude: ['pulsar/ssr', '@pulsar-framework/ui', '@pulsar-framework/pulsar.dev'],
+    exclude: [
+      'pulsar/ssr',
+      '@pulsar-framework/ui',
+      '@pulsar-framework/pulsar.dev',
+      '@pulsar-framework/formular.dev',
+    ],
     force: true,
   },
   build: {
